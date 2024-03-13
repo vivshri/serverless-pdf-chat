@@ -39,23 +39,24 @@ let router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: Documents,
+        element: <Documents />, // Changed from Component to element
       },
       {
         path: "/doc/:documentid/:conversationid",
-        Component: Chat,
+        element: <Chat />, // Changed from Component to element
       },
       {
         path: "/personalized-portal",
-        Component: PersonalizedPortal,
+        element: <PersonalizedPortal />, // Changed from Component to element
       },
       {
         path: "/recognized-portal",
-        Component: RecognizedPortal,
+        element: <RecognizedPortal />, // Changed from Component to element
       },
     ],
   },
 ]);
+
 
 function App() {
   return <RouterProvider router={router} />;
