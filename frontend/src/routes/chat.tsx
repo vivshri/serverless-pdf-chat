@@ -117,17 +117,17 @@ const Document: React.FC = () => {
     setMessageStatus("idle");
   };
 
-  const startConversation = async () => {
-    // Initiate a new conversation
-    const newConversation = await API.post(
-      "serverless-pdf-chat",
-      `/doc/${params.documentid}`, // You may want to replace `params.documentid` with a static value if necessary
-      {
-        body: {
-          fileName: "staticFileName", // Use a static file name as per your requirement
-        },
-      }
-    );
+  // const startConversation = async () => {
+  //   // Initiate a new conversation
+  //   const newConversation = await API.post(
+  //     "serverless-pdf-chat",
+  //     `/doc/${params.documentid}`, // You may want to replace `params.documentid` with a static value if necessary
+  //     {
+  //       body: {
+  //         fileName: "staticFileName", // Use a static file name as per your requirement
+  //       },
+  //     }
+  //   );
 
     // Send the "describe abcd" message
     await API.post(

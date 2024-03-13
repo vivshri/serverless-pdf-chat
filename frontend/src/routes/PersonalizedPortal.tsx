@@ -1,4 +1,4 @@
-import React from 'react';
+
 import trailImage from './trail.png';
 
 const PersonalizedPortal = () => {
