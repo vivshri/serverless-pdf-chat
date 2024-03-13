@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { API } from "aws-amplify";
 import trailImage from './trail.png';
 
+
 const RecognizedPortal = () => {
   // State to store API call details
   const [apiCallDetails, setApiCallDetails] = useState({
@@ -54,14 +55,18 @@ const RecognizedPortal = () => {
     // setMessageStatus("idle");
   };
 
+  // @ts-ignore
   const formatResponseContent = (responseContent) => {
     // Split the response content by "\n\n" to preserve paragraphs
+    // @ts-ignore
     const paragraphs = responseContent.split('\n\n');
     
     // Map each paragraph to a span element, replacing single "\n" with <br />, and join paragraphs with an additional <br /> to preserve double newlines
+    // @ts-ignore
     return paragraphs.map((paragraph, index) => (
       <span key={index}>
-        {paragraph.split('\n').map((line, lineIndex) => (
+        {// @ts-ignore
+        paragraph.split('\n').map((line, lineIndex) => (
           <React.Fragment key={lineIndex}>
             {line}
             <br />
@@ -71,13 +76,13 @@ const RecognizedPortal = () => {
       </span>
     ));
   };
-
+  // @ts-ignore
   const createMarkup = (responseContent) => {
     // Replace newline characters with <br/> tags
     const htmlContent = responseContent.replace('/\n', '<br/>');
     return { __html: htmlContent };
   };
-
+  // @ts-ignore
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true); // Set loading to true before API call
