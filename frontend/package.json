@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && aws s3 sync dist/ s3://vivek-apr-11-spa-asset --delete && aws cloudfront create-invalidation --distribution-id E14Y51Y0DMVXJ4 --paths '/*'"
   },
   "dependencies": {
     "@aws-amplify/ui-react": "^5.0.1",

@@ -5,6 +5,8 @@ import "./index.css";
 import Layout from "./routes/layout";
 import Documents from "./routes/documents";
 import Chat from "./routes/chat";
+import PersonalizedPortal from "./routes/PersonalizedPortal";
+import RecognizedPortal from "./routes/RecognizedPortal";
 
 Amplify.configure({
   Auth: {
@@ -42,6 +44,14 @@ let router = createBrowserRouter([
       {
         path: "/doc/:documentid/:conversationid",
         Component: Chat,
+      },
+      {
+        path: "/personalized-portal",
+        Component: PersonalizedPortal,
+      },
+      {
+        path: "/recognized-portal",
+        Component: RecognizedPortal,
       },
     ],
   },

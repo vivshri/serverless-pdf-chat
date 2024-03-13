@@ -82,20 +82,69 @@ const Document: React.FC = () => {
       setConversation(updatedConversation);
     }
 
+    const apiUrlPath = `/${conversation?.document.documentid}/${conversation?.conversationid}`;
+
+    // Construct the request body
+    const requestBody = {
+      body: {
+        fileName: conversation?.document.filename,
+        prompt: prompt, // Assuming 'prompt' is a state variable or prop holding the message to be sent
+      },
+    };
+
+    // Log the full API URL and request body for debugging
+    console.log("API URL Path:", apiUrlPath);
+    console.log("Request Body:", JSON.stringify(requestBody, null, 2));
+
     await API.post(
       "serverless-pdf-chat",
-      `/${conversation?.document.documentid}/${conversation?.conversationid}`,
-      {
-        body: {
-          fileName: conversation?.document.filename,
-          prompt: prompt,
-        },
-      }
+      apiUrlPath,
+      requestBody
     );
+
+    // await API.post(
+    //   "serverless-pdf-chat",
+    //   `/${conversation?.document.documentid}/${conversation?.conversationid}`,
+    //   {
+    //     body: {
+    //       fileName: conversation?.document.filename,
+    //       prompt: prompt,
+    //     },
+    //   }
+    // );
     setPrompt("");
     fetchData(conversation?.conversationid);
     setMessageStatus("idle");
   };
+
+  const startConversation = async () => {
+    // Initiate a new conversation
+    const newConversation = await API.post(
+      "serverless-pdf-chat",
+      `/doc/${params.documentid}`, // You may want to replace `params.documentid` with a static value if necessary
+      {
+        body: {
+          fileName: "staticFileName", // Use a static file name as per your requirement
+        },
+      }
+    );
+
+    // Send the "describe abcd" message
+    await API.post(
+      "serverless-pdf-chat",
+      `/${newConversation.documentid}/${newConversation.conversationid}`,
+      {
+        body: {
+          prompt: "describe abcd",
+        },
+      }
+    );
+
+    // Optionally, fetch and display the updated conversation
+    fetchData(newConversation.conversationid);
+};
+
+
 
   return (
     <div className="">
