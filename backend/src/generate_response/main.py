@@ -24,7 +24,8 @@ def lambda_handler(event, context):
     human_input = event_body["prompt"]
     conversation_id = event["pathParameters"]["conversationid"]
 
-    user = event["requestContext"]["authorizer"]["claims"]["sub"]
+    # user = event["requestContext"]["authorizer"]["claims"]["sub"]
+    user = "ALL"
 
     s3.download_file(BUCKET, f"{user}/{file_name}/index.faiss", "/tmp/index.faiss")
     s3.download_file(BUCKET, f"{user}/{file_name}/index.pkl", "/tmp/index.pkl")
@@ -41,6 +42,7 @@ def lambda_handler(event, context):
     ), Bedrock(
         model_id="anthropic.claude-v2", client=bedrock_runtime, region_name="us-east-1"
     )
+    
     faiss_index = FAISS.load_local("/tmp", embeddings)
 
     message_history = DynamoDBChatMessageHistory(

@@ -24,7 +24,8 @@ logger = Logger()
 def lambda_handler(event, context):
     key = urllib.parse.unquote_plus(event["Records"][0]["s3"]["object"]["key"])
     split = key.split("/")
-    user_id = split[0]
+    # user_id = split[0]
+    user_id = "ALL"
     file_name = split[1]
 
     document_id = shortuuid.uuid()

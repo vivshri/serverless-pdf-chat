@@ -29,7 +29,8 @@ def s3_key_exists(bucket, key):
 
 @logger.inject_lambda_context(log_event=True)
 def lambda_handler(event, context):
-    user_id = event["requestContext"]["authorizer"]["claims"]["sub"]
+    # user_id = event["requestContext"]["authorizer"]["claims"]["sub"]
+    user_id = "ALL"
     file_name_full = event["queryStringParameters"]["file_name"]
     file_name = file_name_full.split(".pdf")[0]
 

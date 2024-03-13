@@ -17,6 +17,7 @@ logger = Logger()
 
 
 def set_doc_status(user_id, document_id, status):
+    user_id = "ALL"
     document_table.update_item(
         Key={"userid": user_id, "documentid": document_id},
         UpdateExpression="SET docstatus = :docstatus",
